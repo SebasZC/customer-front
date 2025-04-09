@@ -1,15 +1,15 @@
-name: Maven Build and Test (Feature Branch)
+name: Angular Build (Feature Branch)
 
 on:
   push:
     branches:
-      - feature/**  # Se ejecuta para cualquier rama que comience con "feature/"
+      - feature/**
   pull_request:
     branches:
       - feature/**
 
 jobs:
-  build-and-test:
+  build-angular:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,18 +19,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Puedes ajustar la versión según tu proyecto
+          node-version: '18'  # O la que uses en tu proyecto
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      - name: Install frontend dependencies
-        working-directory: frontend
+      - name: Install dependencies
         run: npm install
 
-      - name: Build Angular frontend
-        working-directory: frontend
+      - name: Build Angular app
         run: ng build --configuration production
 
       - name: Final success message
-        run: echo "✅ Build and test completed successfully"
+        run: echo "✅ Angular build completed successfully"
